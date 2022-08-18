@@ -45,9 +45,10 @@ export default function MarketPlaceArea() {
   },[change])
 
   const buyMarketItem = async (item) => {
-    await window.ethereum.request({method: 'eth_requestAccounts'})
+    // await window.ethereum.request({method: 'eth_requestAccounts'})
     const Web3Provider = new ethers.providers.Web3Provider(window.ethereum)
-    const signer = Web3Provider.getSigner(process.env.NEXT_PUBLIC_RANDOM_ADDRESS)
+    await Web3Provider.send('eth_requestAccounts', []); 
+    const signer = Web3Provider.getSigner()
 
     console.log(ethers.utils.parseUnits(item.price, 18))
     const marketplace = new ethers.Contract(contractAddress, MarketPlace.abi, signer)
