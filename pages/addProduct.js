@@ -19,7 +19,7 @@ export default function AddProduct() {
       e.preventDefault()
       setLoading(true)
         const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const signer = provider.getSigner();
+        const signer = provider.getSigner(process.env.NEXT_PUBLIC_RANDOM_ADDRESS);
 
         const contract = new ethers.Contract(
             contractAddress,
